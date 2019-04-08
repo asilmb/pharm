@@ -2,27 +2,58 @@
 
 namespace app\models;
 
-use Yii;
-use yii\base\Model;
-use yii\db\ActiveRecord;
-use yii\db\Query;
-
 /**
- * ContactForm is the model behind the contact form.
+ * This is the model class for table "center".
+ *
+ * @property int $id
+ * @property string $city
+ * @property int $count
  */
-class CenterModel  extends ActiveRecord
+class CenterModel extends \yii\db\ActiveRecord
 {
-    public $city;
-    public $count;
-
-
 	/**
-	 * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
+	 * {@inheritdoc}
 	 */
 	public static function tableName()
 	{
-		return '{{center}}';
+		return 'center';
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['count'], 'integer'],
+			[['city'], 'string', 'max' => 255],
+		];
+	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'city' => 'City',
+			'count' => 'Count',
+		];
+	}
+
+	public function upCount()
+	{
+		$this->count = $this->count() + 1;
+	}
+
+	public function downCount()
+	{
+		$this->count = $this->count() - 1;
+	}
+
+	public function updateCount($quantity, $isPlus = true)
+	{
+		$this->count = ($isPlus) ? $this->count() + $quantity : $this->count() - $quantity ;
+	}
 }

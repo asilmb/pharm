@@ -11,15 +11,34 @@ use yii\db\ActiveRecord;
  */
 class OwnModel extends ActiveRecord
 {
-    public $name;
-    public $count;
-
 	/**
-	 * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
+	 * {@inheritdoc}
 	 */
 	public static function tableName()
 	{
-		return '{{own}}';
+		return 'own';
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['count'], 'integer'],
+			[['name'], 'string', 'max' => 255],
+		];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'name' => 'Name',
+			'count' => 'Count',
+		];
+	}
 }

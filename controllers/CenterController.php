@@ -124,4 +124,11 @@ class CenterController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+	public function actionUp(CenterModel $model)
+	{
+		$model->upCount();
+		return $this->redirect(['index']);
+	}
+
 }
