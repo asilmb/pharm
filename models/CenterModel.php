@@ -45,6 +45,7 @@ class CenterModel extends \yii\db\ActiveRecord
 	public function upCount()
 	{
 		$this->count = $this->count() + 1;
+
 	}
 
 	public function downCount()

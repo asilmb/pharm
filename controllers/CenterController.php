@@ -128,7 +128,7 @@ class CenterController extends Controller
 	public function actionUp(CenterModel $model)
 	{
 		$model->upCount();
-		return $this->redirect(['index']);
+		return json_encode(['count' => $model->count]);
 	}
 
 }
