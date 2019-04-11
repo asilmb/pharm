@@ -44,17 +44,19 @@ class CenterModel extends \yii\db\ActiveRecord
 
 	public function upCount()
 	{
-		$this->count = $this->count() + 1;
-
+		$this->count = $this->count + 1;
+		$this->save();
 	}
 
 	public function downCount()
 	{
-		$this->count = $this->count() - 1;
+		$this->count = $this->count - 1;
+		$this->save();
 	}
 
-	public function updateCount($quantity, $isPlus = true)
+	public function updateCount($quantity)
 	{
-		$this->count = ($isPlus) ? $this->count() + $quantity : $this->count() - $quantity ;
+		$this->count = $quantity ;
+		$this->save();
 	}
 }

@@ -125,10 +125,29 @@ class CenterController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-	public function actionUp(CenterModel $model)
+	public function actionUp()
 	{
+		/** @var CenterModel $model */
+		$body = Yii::$app->request->getBodyParam('CenterForm');
+		$model = $this->findModel($body['id']);
 		$model->upCount();
 		return json_encode(['count' => $model->count]);
 	}
 
+	public function actionDown()
+	{
+		/** @var CenterModel $model */
+		$body = Yii::$app->request->getBodyParam('CenterForm');
+		$model = $this->findModel($body['id']);
+		$model->downCount();
+		return json_encode(['count' => $model->count]);
+	}
+	public function actionCountUpdate()
+	{
+		/** @var CenterModel $model */
+		$body = Yii::$app->request->getBodyParam('CenterForm');
+		$model = $this->findModel($body['id']);
+		$model->updateCount($body['count']);
+		return json_encode(['count' => $model->count]);
+	}
 }
